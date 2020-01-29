@@ -1,6 +1,5 @@
 import { Router } from "./router";
 import * as mongoose from "mongoose"
-import {User} from "../models/users.model";
 
 
 export abstract class ModelRoutes<D extends mongoose.Document> extends Router
@@ -21,6 +20,11 @@ export abstract class ModelRoutes<D extends mongoose.Document> extends Router
     store = (req, resp, next) => {
         let model = new this.model(req.body)
         model.save().then( this.render(resp, next) ).catch( next )
+    }
+
+    findByIdAndUpdate = (req, resp, next) => {
+        const options = { runValidators: true, new: true }
+        this.model.findByIdAndUpdate(req.params.id, { $set: req.body }, options ).then( this.render(resp, next) ).catch( next )
     }
 
 }

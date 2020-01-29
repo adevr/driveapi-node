@@ -20,15 +20,7 @@ class UsersRouter extends ModelRoutes<User> {
 
         application.post("/users" , this.store )
 
-        application.put("/users/:id", (req, resp, next) => {
-            const options = { runValidators: true, new: true }
-            User.findByIdAndUpdate(req.params.id, { $set: req.body }, options).then( user => {
-                resp.json({ user: user, message: "Updated Sucessfully" })
-                return next()
-            } ).catch( err => {
-                throw new NotFoundError(`Provided id was not found: ${req.params.id}`)
-            } )
-        } )
+        application.put("/users/:id", this.findByIdAndUpdate )
 
         /**
          * PATCH
