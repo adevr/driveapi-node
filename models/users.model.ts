@@ -39,15 +39,15 @@ const userSchema = new mongoose.Schema( {
             message: "{PATH}: Invalid Zip Code ({VALUE})"
         }
     }
-} )
+} );
 
 const saveHashed = function ( next ) {
-    const user: User = this
-    if ( !user.isModified("password") ) next()
+    const user: User = this;
+    if ( !user.isModified("password") ) next();
     else {
         hashPassword( user, next )
     }
-}
+};
 
 const updateMiddleware = function (next){
     if(!this.getUpdate().password){
@@ -55,10 +55,10 @@ const updateMiddleware = function (next){
     }else{
         hashPassword(this.getUpdate(), next)
     }
-}
+};
 
-userSchema.pre( "save",  saveHashed )
-userSchema.pre( "findOneAndUpdate", updateMiddleware )
-userSchema.pre( "update", updateMiddleware )
+userSchema.pre( "save",  saveHashed );
+userSchema.pre( "findOneAndUpdate", updateMiddleware );
+userSchema.pre( "update", updateMiddleware );
 
-export const User = mongoose.model<User>("User", userSchema)
+export const User = mongoose.model<User>("User", userSchema);

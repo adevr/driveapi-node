@@ -10,9 +10,9 @@ export abstract class Router extends EventEmitter
     {
         return (document) => {
             if (document){
-                this.emit("beforeRender", document )
+                this.emit("beforeRender", document );
                 response.json( document )
-            }else throw new NotFoundError(`Data not found`)
+            }else throw new NotFoundError(`Data not found`);
 
             return next()
         }

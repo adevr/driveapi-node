@@ -8,10 +8,10 @@ import { errorHandler } from "../middlewares/error.handler";
 
 export class Server
 {
-    application: restify.Server
+    application: restify.Server;
 
     initializeDB(): mongoose.MongooseThenable {
-        (<any>mongoose).Promise = global.Promise
+        (<any>mongoose).Promise = global.Promise;
         return mongoose.connect( environment.db.url, {
             useMongoClient: true
         } )
@@ -23,11 +23,11 @@ export class Server
                 this.application = restify.createServer({
                     name:   "meet-api",
                     version: "1.0.0"
-                })
+                });
 
-                this.application.use( restify.plugins.queryParser() )
-                this.application.use( restify.plugins.bodyParser() )
-                this.application.use( mergePatchBodyParser )
+                this.application.use( restify.plugins.queryParser() );
+                this.application.use( restify.plugins.bodyParser() );
+                this.application.use( mergePatchBodyParser );
 
 
                 //adicionar as routes
@@ -37,7 +37,7 @@ export class Server
 
                 this.application.listen(environment.server.port, () => {
                     resolve(this.application)
-                } )
+                } );
 
                 this.application.on( "restifyError", errorHandler )
 

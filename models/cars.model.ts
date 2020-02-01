@@ -35,6 +35,6 @@ const carSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-} )
+} );
 
-export const Car = mongoose.model<Cars>("Car", carSchema)
+export const Car = mongoose.model<Cars>("Car", carSchema);
