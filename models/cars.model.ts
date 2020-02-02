@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose"
+import { Extras, extraSchema } from "./extras.model";
 
 
 export interface Cars extends mongoose.Document{
@@ -6,7 +7,8 @@ export interface Cars extends mongoose.Document{
     name: string,
     year: number,
     plate: string,
-    tires: string
+    tires: string,
+    extras: Extras[]
 }
 
 
@@ -30,11 +32,18 @@ const carSchema = new mongoose.Schema({
     plate: {
         type: String,
         required: false,
+        unique: true,
     },
     tires: {
         type: String,
         required: true
+    } ,
+    extras : {
+        type: [ extraSchema ],
+        required: false,
+        select: true,
+        default: []
     }
-} );
+} )
 
-export const Car = mongoose.model<Cars>("Car", carSchema);
+export const Cars = mongoose.model<Cars>("Cars", carSchema);

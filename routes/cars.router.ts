@@ -1,10 +1,10 @@
 import * as restify from "restify"
-import { Cars, Car } from "../models/cars.model"
+import { Cars } from "../models/cars.model"
 import {ModelRoutes} from "../common/model.routes";
 
 class CarsRouter extends ModelRoutes<Cars>{
     constructor() {
-        super(Car)
+        super(Cars)
     }
 
     applyRoutes(application: restify.Server) {

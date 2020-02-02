@@ -1,7 +1,6 @@
 import { Router } from "./router";
 import * as mongoose from "mongoose"
-import { NotFoundError } from "restify-errors";
-import {User} from "../models/users.model";
+import { NotFoundError } from "restify-errors"
 
 export abstract class ModelRoutes<D extends mongoose.Document> extends Router
 {
